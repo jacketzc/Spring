@@ -1,0 +1,3 @@
+<bean scope=""></bean>
+scope指定为prototype为多例模式，每次getBean都会new新的对象
+scope指定为singleton为单例模式，每次getBean得到的是同一个对象

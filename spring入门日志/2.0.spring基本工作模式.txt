@@ -23,6 +23,7 @@ springIoc（控制反转）基本思想：使用xml来代替手动new管理对象
 	ApplicationContext context=new ClassPathXmlApplicationContext("beans.xml");
 	//ClassPathXmlApplicationContext的构造函数为xml文件路径，因为在src根目录下，所以直接写beans.xml就好
 	从容器中获取对象：
+	//或者使用new FileSystemXmlApplicationContext("文件绝对路径");从磁盘读取
 	IUserService service=(IUserService) context.getBean("userService");
 	//该方法的参数就是bean的id
 	//该方法返回的是Object，所以要转型

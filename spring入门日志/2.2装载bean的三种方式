@@ -1,0 +1,52 @@
+此条目仅供参考用
+
+1.new实现类
+//此前使用的默认方式就是这种
+准备部分：
+	目标类
+xml部分：
+<bean id="service" class="com.jacketzc.IUserServiceImpl">
+    <property name="Name" value="xiaoming"></property>
+</bean>
+java部分：
+	1.获取ApplicationContext
+	2.使用context.getBean("beanName")从容器中获取一个目标对象
+	//返回值是Object，所以要转型
+	3.调用方法
+原理：
+	spring创建了一个目标对象
+
+2.静态工厂模式
+//因为调用一个静态方法，所以叫这个
+准备部分：
+	目标类
+	目标类的工厂类（有一个返回目标对象的静态方法）
+xml部分：
+<bean id="name" class="com.jacketzc.IUserServiceFactory" facory-method="create">
+//class填工厂类，facory-method填入创建目标对象的静态方法
+</bean>
+java部分：	
+	1.获取ApplicationContext
+	2.使用context.getBean("beanName")从容器中获取一个目标对象
+	//没错，虽然bean的id指向的是工厂类，但是获取到的是目标对象
+	3.调用方法
+原理：	
+	spring创建了一个工厂对象，此对象执行了静态方法
+	getBean()方法返回静态方法的返回值，也就是目标对象
+	
+3.实例工厂模式
+准备部分：
+	目标类
+	目标类的工厂类（有一个返回目标对象的静态方法）
+xml部分：
+//xml中需要设置两个bean，一个用于装载工厂，另一装载目标类
+<bean id="name" class="com.jacketzc.IUserServiceFactory">
+//class填工厂类
+</bean>
+<bean id="name" factory-bean="工厂beanid " factory-method="create">
+</bean>
+java部分：
+	和第一种方式一样
+原理：	
+	spring创建了一个工厂对象，spring使用工厂对象的方法创建了一个目标对象
+	getBean()方法返回目标对象	

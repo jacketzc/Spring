@@ -7,3 +7,11 @@ for循环：fori
 自动纠错：alt+enter
 
 自动生成get和set：alt+insert
+
+快速注释：ctrl+/	斜杠注释
+		  ctrl+shift+/	大范围注释
+
+查看某个类的源码：ctrl+鼠标左键
+
+选中代码块：ctrl+w
+//多次使用范围将增大
