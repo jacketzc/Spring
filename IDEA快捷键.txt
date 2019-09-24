@@ -1,0 +1,9 @@
+main函数：psvn
+
+print方法：sout
+
+for循环：fori
+
+自动纠错：alt+enter
+
+自动生成get和set：alt+insert
