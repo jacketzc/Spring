@@ -1,0 +1,29 @@
+spring是一个容器，它通过xml配置的bean来创建一个对象存放到容器里
+springIoc（控制反转）基本思想：使用xml来代替手动new管理对象
+
+手动配置spring的xml文件
+1.在src根目录下创建beans.xml文件
+//此xml文件就是spring的配置文件
+//文件遵守的规则可以在spring-framework-docs-reference-html-xsd-config.xml中查看到
+2.输入配置文件的规则：
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+    "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+<!-- bean definitions here -->
+
+</beans>
+3.添加一个bean到容器中：
+<bean id="userService" class="com.jacketzc.services.IUserServiceImpl"></bean>
+//id和class的意思非常明了
+4.在方法中调用bean
+	加载配置文件：
+	ApplicationContext context=new ClassPathXmlApplicationContext("beans.xml");
+	//ClassPathXmlApplicationContext的构造函数为xml文件路径，因为在src根目录下，所以直接写beans.xml就好
+	从容器中获取对象：
+	IUserService service=(IUserService) context.getBean("userService");
+	//该方法的参数就是bean的id
+	//该方法返回的是Object，所以要转型
+	//该方法不论返回多少次，都是同一个对象（一个id对应一个对象）

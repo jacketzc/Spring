@@ -1,0 +1,9 @@
+承接着上一步，我们已经有了一个bean容器来装载IUserServiceImpl对象
+与此同时
+IUserServiceImpl属性的值我也想交给spring管理
+于是我们注入一个依赖：
+<bean id="userService" class="com.jacketzc.services.IUserServiceImpl>
+	<property name="name" value="weimick"></property>
+	//名字为name的属性将在这个bean中赋予初始值weimick（相当于执行set方法）
+	//该属性必须设置set方法
+</bean>

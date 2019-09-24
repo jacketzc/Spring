@@ -1,0 +1,14 @@
+此项目目前只能在idea环境下搭建
+
+手动搭建
+需要准备五个包：
+spring-beans
+spring-context
+spring-core
+spring-expression
+com.springsource.org.apache.commons.logging
+//前4个包源自spring-framework，最后一个包是第三方依赖包
+
+IDEA-新建项目-spring
+右边对话框仅选择spring即可
+下方的libraries选择use library，选择create，选中准备的五个包
