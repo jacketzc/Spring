@@ -1,0 +1,35 @@
+注解注入的含义就是使用注解代替写<Bean>的配置文件来配置bean
+@Component()等价于
+<Bean class="目标类"></Bean>
+@Component("id")等价于
+<Bean id="" class="目标类"></Bean>
+
+步骤
+1.添加依赖
+这是标准bean的xml文件：
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+    "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+<!-- bean definitions here -->
+</beans>
+需要添加依赖context
+<Beans>处：
+xmlns:context="http://www.springframework.org/schema/context"
+schemaLocaton处：
+http://www.springframework.org/schema/context
+还有
+http://www.springframework.org/schema/context/spring-context.xsd
+完整的xml框架：
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/context
+                             http://www.springframework.org/schema/context/spring-context.xsd
+                              http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+</beans>
+
+2.激活注解
