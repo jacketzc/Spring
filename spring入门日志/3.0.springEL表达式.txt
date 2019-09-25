@@ -1,0 +1,17 @@
+spEL表达式和EL表达式差不多，使用#{}代表某个计算值
+
+1.#{123}，#{'abc'}表示数字和字符串
+<property name="age" value="#{18}"></property>
+//和<property name="age" value="18"></property>用法一致
+
+2.#{T(类).字段 /方法}表示静态方法和字段
+#{T(java.lang.Math).PI}就表示 π的值
+
+3.#{bean}表示另一个bean的引用
+<property name="age" value="#{user1}"></property>
+//等价于<property name="age" ref="user1"></property>
+
+4.#{bean.propName}表示另一个bean中的数据
+<property name="age" value="#{user1.age}"></property>
+
+5.#{bean.toString()}执行bean中的方法，此表达式表示方法的返回值

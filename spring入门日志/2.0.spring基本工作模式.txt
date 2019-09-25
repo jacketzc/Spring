@@ -2,6 +2,7 @@ spring是一个容器，它通过xml配置的bean来创建一个对象存放到容器里
 springIoc（控制反转）基本思想：使用xml来代替手动new管理对象
 
 手动配置spring的xml文件
+//配置文件的任何局部错误都可能导致程序无法运行
 1.在src根目录下创建beans.xml文件
 //此xml文件就是spring的配置文件
 //文件遵守的规则可以在spring-framework-docs-reference-html-xsd-config.xml中查看到

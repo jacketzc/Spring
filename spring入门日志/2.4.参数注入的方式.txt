@@ -1,0 +1,30 @@
+1.属性注入
+//之前使用的默认方式就是这种
+//此方法要求属性设置了set()方法！
+<bean id="service" class="com.jacketzc.IUserServiceImpl">
+    <property name="Name" value="xiaoming"></property>
+</bean>
+
+2.构造器注入
+//此方式需要spring4.0以上或者jdk1.7以下
+<bean id="user" class="com.jacketzc.User">
+    <constructor-arg name="age" value="21"></constructor-arg>
+    <constructor-arg name="name" value="jack"></constructor-arg>
+</bean>
+//constructor-arg表明构造器参数，idea会自动审查参数是否符合要求
+//因为只是按照参数名和值赋值，此方法可能会产生歧义
+//比如同名的两个类型不同的参数，编译器就没办法识别（当然这也不符合规范）
+
+2.1构造器索引注入
+<bean id="user" class="com.jacketzc.User">
+    <constructor-arg index="0" value="21" type="java.lang.String"></constructor-arg>
+    <constructor-arg index="1" value="jack" type="int"></constructor-arg>
+</bean>
+//此方法添加了索引，所以定位更加准确
+
+3.命名空间注入
+//此方式需要spring4.0以上或者jdk1.7以下
+//需要在开头添加命名空间：xmlns:p="http://www.springframework.org/schema/p
+<bean id="user1" class="com.jacketzc.User" 
+p:age="10" p:passwd="123" p:name="jake">
+</bean>

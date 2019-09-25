@@ -1,0 +1,32 @@
+List注入
+//假定此list属性有get和set方法
+<bean id="" class="">
+	<property name="">
+		<list>
+			<value>apple</value>
+			<value>banana</value>
+			<value>orange</value>
+		</list>	
+	</property>
+</bean>
+
+Set注入
+<bean id="" class="">
+	<property name="">
+		<set>
+			<value>apple</value>
+			<value>banana</value>
+			<value>orange</value>
+		</set>	
+	</property>
+</bean>
+
+Map注入
+<bean id="" class="">
+	<property name="">
+		<map>
+			<entry key="001" value="apple"></entry>
+			<entry key="002" value="banana"></entry>
+		</map>	
+	</property>
+</bean>
