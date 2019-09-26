@@ -1,4 +1,6 @@
 注解注入的含义就是使用注解代替写<Bean>的配置文件来配置bean
+//注解默认是不生效的
+//注解使用的是单例模式
 @Component()等价于
 <Bean class="目标类"></Bean>
 @Component("id")等价于
@@ -26,10 +28,27 @@ http://www.springframework.org/schema/context/spring-context.xsd
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                            http://www.springframework.org/schema/context
-                             http://www.springframework.org/schema/context/spring-context.xsd
-                              http://www.springframework.org/schema/beans/spring-beans.xsd">
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+							 http://www.springframework.org/schema/context
+                              http://www.springframework.org/schema/context/spring-context.xsd">
     
 </beans>
 
 2.激活注解
+<!--开启注解-->
+<context:annotation-config></context:annotation-config>
+<!--提供扫描路径,com.jacketzc路径下的所有文件都会被扫描-->
+<context:component-scan base-package="com.jacketzc"></context:component-scan>
+
+3.添加注解
+在需要创建bean的类处加上@Component
+如：
+@Component
+public class User {
+
+4.获取bean
+有id：和以往一样，使用getBean(id)即可获取到该bean
+//此方式需要强转
+无id：使用getBNean(User.class)即可获取到该类的bean
+//此方法获取bean不需要强转
+//不仅可以使用类.class，也可也可以用实现接口.class作为参数（在不引起歧义的情况下）
