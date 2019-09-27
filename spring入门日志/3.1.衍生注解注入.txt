@@ -1,0 +1,35 @@
+在@component注解的基础上为不同的服务层添加了新的注解：
+数据库层：@Repository
+服务层：@Service
+控制器层：@Controller
+以上的注解都标注在实现接口的对应类前
+在高层次申明对象引用时（比如在service申明一共dao引用）
+可以使用@Autowired注解
+来为他们自动装填对象
+//不同层次的注解使得spring可以知道创建对象的顺序，使得在高层次能自动获取低层次的对象
+
+
+例：
+@Controller
+//控制层注解
+public class UserAction{
+	@Autowired
+	private IUserService service;
+	//此处将自动获取service层的IUserServiceImpl的对象
+
+}
+
+获取对象也可以指定id
+使用@Qualifier("bean的id")注解
+可以注入对应id的对象
+@Autowired
+@Qualifier("myservice")
+private IUserService service;
+//此处将获取指定id为myservice的service实现类
+//我猜当出现多个实现类对应一个接口的时候，需要用这种方法来区分获取的对象类型
+//两处注解等效于@Resouce(name="myservice")这一个注解
+
+
+多例注解
+@Scope("prototype")
+//默认不写的情况，为单例模式 
