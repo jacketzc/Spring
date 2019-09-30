@@ -1,0 +1,22 @@
+导入新的包：
+com.springsource.org.apache.aspectj.weaver-1.6.8.RELEASE.jar
+
+//之所以叫自动代理，是因为不需要手动配置代理bean，也不需要获取代理对象
+//默认为jdk代理，aop标签添加proxy-target-class属性为true时为cglib代理
+
+配置xml：
+	配置真实bean（如果使用注解，那么这一步省了）
+	配置切面bean
+	配置自动代理bean：
+		添加注解aop：
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		//添加注解location省略
+		<aop:config proxy-target-class="true">
+			<!--切入点(默认为全部方法)-->
+			<aop:pointcut id="myPointcut" expression="execution(* com.service.*.*(..))"></aop:pointcut>
+			//expression="..."是一个固定的写法，表示对com.service包下的所有类中的所有方法全部增强
+			<!--通知-->
+			<aop:advisor advice-ref="aspect" pointcut-ref="myPointcut"></aop:advisor>
+		</aop:config>
+
+从spring中获取真实bean时获取的就是代理bean

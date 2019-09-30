@@ -33,3 +33,16 @@ private IUserService service;
 多例注解
 @Scope("prototype")
 //默认不写的情况，为单例模式 
+
+
+初始化和销毁注解
+//不使用注解的xml格式：<Bean init-method="" destroy-method=""></Bean>
+初始化注解：
+@PostConstruct
+public void myInit(){}
+//在类初始化的时候将调用该方法
+//类在第一次使用的时候将初始化
+销毁注解：
+@PreDestroy
+public void myDestroy(){}
+//在类销毁的时候将调用该方法（比如.close方法）

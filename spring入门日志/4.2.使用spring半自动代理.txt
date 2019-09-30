@@ -1,0 +1,54 @@
+让spring创建代理对象、从spring中手动获得代理对象
+//默认情况spring生成的是jdk代理
+需要两个新的包：
+//使用老版本的缘故
+com.springsource.org.aopalliance-1.0.0.jar
+//此包定义了规范，内容全部为接口
+spring-aop-3.2.0RELEASE.jar
+//此包定义了实现接口的类
+
+通知种类：
+前置通知：org.springframework.aop.MethodBeforeAdvice
+后置通知：org.springframework.aop.AfterReturningAdvice
+环绕通知：org.aopalliance.intercept.MethodInterceptor
+异常抛出通知：org.springframework.aop.ThrowsAdvice
+//抛出异常后实施增强
+引介通知：org.springframework.aop.introductionInterceptor
+//在目标类中添加一些新的方法和属性  
+
+准备条件：
+1.目标类和接口
+2.切面类（继承MethodInterceptor接口的类，必须实现invoke方法，和JDK代理以及cglib有相似之处）
+//之前书上的习惯在于此类同样拥有一个返回代理对象的方法
+//而视频作者的习惯是在使用处创建代理对象
+//书的作者认为拦截器采用单独的接口，而视频作者认为拦截行为就是在invoke方法中执行其他方法
+3.配置xml
+	配置真实bean
+	配置切面bean
+	配置代理bean
+	//spring很显然也有自己独有的习惯（它在形式上并非使用静态方法来创建代理对象）
+
+    <!--配置真实bean-->
+    <bean id="userService" class="com.jacketzc.IUserServiceImpl"></bean>
+    <!--配置切面bean-->
+    <bean id="aspect" class="com.jacketzc.MyAspect"></bean>
+    <!--配置代理bean-->
+    <bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--代理类需要的参数必定是真实对象、接口、切面对象-->
+        <property name="target" ref="userService"></property>
+        <property name="interfaces" value="com.jacketzc.IUserService"></property>
+		//如果只是一个接口，那么写value参数也可以，如果有多个service，应该写子标签list
+        <property name="interceptorNames" value="aspect"></property>
+        <!--此处虽然是引用bean，但是得用value-->
+    </bean>
+
+
+使用方法：
+和JDK代理差不多，只是结合了bean的用法
+从spring中获取的代理bean转型为接口类型，直接调用其中的方法就行
+此对象会执行代理对象的invoke方法
+
+
+使用cglib代理：
+在依赖注入时添加一行：
+<bean name="optimized" value="true"></bean>
