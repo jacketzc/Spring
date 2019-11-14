@@ -1,0 +1,67 @@
+AspectJ是AOP的一种实现框架（AOP本身只是一种思想）
+
+AspectJ也有6种通知格式：
+	before：前置通知（应用于校验）
+	//在方法执行前执行，如果通知抛出异常，阻止方法运行
+	afterReturning：后置通知（应用于常规数据处理）
+	//方法正常返回后执行，如果方法中抛出异常，该通知无法执行
+	//必须在方法后执行，所以可以用获得方法的返回值
+	around：环绕通知（最常用）
+	//方法执行前后分别执行，可以阻止方法执行
+	//必须手动执行目标方法
+	afterThrowing：抛出异常通知
+	//方法抛出异常后执行
+	after：最终通知
+	//方法执行后执行，无论方法是否出现异常
+
+具体实现：
+	目标类：没有变化
+	切入类：不需要导入任何的包，不需要实现或者继承任何的接口，不需要创建任何的代理类对象，只需要定义几个需要切入的方法即可
+	//因为环绕通知需要手动执行方法，所以该切入方法需要参数ProceedingJoinPoint引用，调用.proceed()方法执行目标方法（还是要导入一个包）
+	//.proceed()方法和invoke方法类似，它返回一个Object
+	xml：
+		配置一个目标类bean
+		配置一个切入类bean
+		配置aop：
+	<aop:config>
+		<aop:aspect ref="myAspect">
+            <!--定义一个切入点-->
+            <aop:pointcut id="myPointcut" expression="execution(* com.service.StuServiceImpl.*(..))"/>
+            <!--配置一个前置通知-->
+<!--            <aop:before method="myBefore" pointcut-ref="myPointcut"></aop:before>-->
+            <!--配置一个最终通知-->
+<!--            <aop:after method="myAfter" pointcut-ref="myPointcut"></aop:after>-->
+            <!--配置一个后置通知-->
+<!--            <aop:after-returning method="myAfteruterning" pointcut-ref="myPointcut"></aop:after-returning>-->
+            <!--配置一个环绕通知-->
+            <aop:around method="myAround" pointcut-ref="myPointcut"></aop:around>
+        </aop:aspect>
+    </aop:config>
+	验证：从容器中取目标类bean时取得的就是代理对象
+	
+切入点表达式
+语法：execution(修饰符 返回值 包.类.方法名(参数)throws 异常)
+修饰符（一般省略）
+	public 公共方法
+	* 任意方法
+返回值
+	void 没有值
+	* 任意值
+包
+	com.jacketzc 固定包
+	com.jacketzc.* com.jacketzc目录下的所有包
+	com.jacketzc.. com.jacketzc目录下的子包（包括自己）
+类 
+	UserServiceImpl 指定类
+	*Impl 以Impl结尾
+	User* 以User开始
+	* 任意
+方法
+	add 固定方法
+	* 任意方法
+参数
+	() 无参
+	(int) 一个int类型
+	(int,void) 一个int一个void
+	(..) 任意参数（常用）
+throws：一般不写

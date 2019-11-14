@@ -8,12 +8,11 @@ springIoc（控制反转）基本思想：使用xml来代替手动new管理对象
 //文件遵守的规则可以在spring-framework-docs-reference-html-xsd-config.xml中查看到
 2.输入配置文件的规则：
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
-    "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<beans>
 
-<!-- bean definitions here -->
 
 </beans>
 3.添加一个bean到容器中：

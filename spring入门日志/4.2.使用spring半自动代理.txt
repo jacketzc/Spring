@@ -35,7 +35,7 @@ spring-aop-3.2.0RELEASE.jar
     <!--配置代理bean-->
     <bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
         <!--代理类需要的参数必定是真实对象、接口、切面对象-->
-        <property name="target" ref="userService"></property>
+        <property name="tarsget" ref="uerService"></property>
         <property name="interfaces" value="com.jacketzc.IUserService"></property>
 		//如果只是一个接口，那么写value参数也可以，如果有多个service，应该写子标签list
         <property name="interceptorNames" value="aspect"></property>
@@ -51,4 +51,4 @@ spring-aop-3.2.0RELEASE.jar
 
 使用cglib代理：
 在依赖注入时添加一行：
-<bean name="optimized" value="true"></bean>
+<property name="optimized" value="true"></property>
