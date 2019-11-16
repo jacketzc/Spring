@@ -19,9 +19,11 @@ spring-aop-3.2.0RELEASE.jar
 准备条件：
 1.目标类和接口
 2.切面类（继承MethodInterceptor接口的类，必须实现invoke方法，和JDK代理以及cglib有相似之处）
+//切面类就是将拦截方法和被拦截方法结合的类
 //之前书上的习惯在于此类同样拥有一个返回代理对象的方法
 //而视频作者的习惯是在使用处创建代理对象
 //书的作者认为拦截器采用单独的接口，而视频作者认为拦截行为就是在invoke方法中执行其他方法
+//此处的MethodInterceptor接口是org.aopalliance.intercept.MethodInterceptor，而不是org.springframework.cglib.proxy.MethodInterceptor
 3.配置xml
 	配置真实bean
 	配置切面bean
@@ -35,7 +37,7 @@ spring-aop-3.2.0RELEASE.jar
     <!--配置代理bean-->
     <bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
         <!--代理类需要的参数必定是真实对象、接口、切面对象-->
-        <property name="tarsget" ref="uerService"></property>
+        <property name="target" ref="uerService"></property>
         <property name="interfaces" value="com.jacketzc.IUserService"></property>
 		//如果只是一个接口，那么写value参数也可以，如果有多个service，应该写子标签list
         <property name="interceptorNames" value="aspect"></property>
