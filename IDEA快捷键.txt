@@ -1,4 +1,4 @@
-main函数：psvn
+﻿main函数：psvn
 
 print方法：sout
 
@@ -17,3 +17,7 @@ for循环：fori
 //多次使用范围将增大
 
 整理代码格式：ctrl+art+L
+
+在当前行下添加一个新的行
+1.光标位置不变：ctrl+enter
+2.光标位置移到下一行：shift+enter

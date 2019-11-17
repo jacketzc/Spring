@@ -1,4 +1,4 @@
-注解注入的含义就是使用注解代替写<Bean>的配置文件来配置bean
+﻿注解注入的含义就是使用注解代替写<Bean>的配置文件来配置bean
 //注解默认是不生效的
 //注解使用的是单例模式
 @Component()等价于
@@ -44,6 +44,7 @@ http://www.springframework.org/schema/context/spring-context.xsd
 在需要创建bean的类处加上@Component
 如：
 @Component
+//或者@Component("id")
 public class User {
 
 4.获取bean
