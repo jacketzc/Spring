@@ -1,0 +1,8 @@
+jdbcTemplate：类似于DBUtils，操作jdbc的工具类，需要依赖于连接池DataSource
+
+jdbc：执行sql语句的java api
+odbc：微软提供的对数据库访问的标准api
+
+dbcp：apache开发的java数据库连接池
+c3p0：开源的jdbc连接池
+//c3p0有自动回收空闲连接的功能

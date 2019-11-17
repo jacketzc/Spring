@@ -1,4 +1,4 @@
-AspectJ是面向AOP的一种框架
+﻿AspectJ是面向AOP的一种框架
 Aspectj提供了切入点表达式
 可以使用注解配置切入点
 
@@ -35,3 +35,4 @@ Aspectj提供了切入点表达式
             <aop:after-throwing method="afterThrow" throwing="e" pointcut-ref="myPointcut"/>
         </aop:aspect>
     </aop:config>
+//aop:pointcut并非必须配置的东西，它是为了方便之后的通知使用pointcut-ref来配置切入点，当然，各种通知可以自定义切入点
