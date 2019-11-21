@@ -1,0 +1,22 @@
+数据库类（比如说UserDao）继承JdbcDaoSupport不需要配置JdbcTemplate类的bean了
+//JdbcDaoSupport类中有getJdbcTemplate方法，直接调用即可
+//与此同时，该数据库类也继承了方法setDataSource，在bean中property填入数据源即可
+
+与此同时将进一步简化dataSource的配置，使用单独的.properties文件存放数据库连接信息
+db.properties内容：
+driverClassName=com.mysql.jdbc.Driver
+url=jdbc:mysql:///day01
+username=jacketzc
+password=
+//尽量不要多余的空格
+
+使用cotext标签读取properties内容：
+<context:property-placeholder location="classpath:db.properties"/>
+使用springEL表达式来代替手动输入文本：
+<bean id="source" class="org.apache.commons.dbcp.BasicDataSource">
+  <property name="driverClassName" value="${driverClassName}"/>
+  <property name="url" value="${url}"/>
+  <property name="username" value="${username}"/>
+  <property name="password" value="${password}"/>
+</bean>
+

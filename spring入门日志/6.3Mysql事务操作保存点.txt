@@ -1,0 +1,24 @@
+假设有ABCD四个操作业务，要求出现错误回滚事务，同时在AB没问题的情况下，CD发生错误回滚到AB执行之后
+//所谓的部分回滚
+业务逻辑：
+Connection conn=null;
+Savepoint savepoint=null;
+try{
+
+  conn.setAutoCommit(false)
+  //开启事务
+  A
+  B
+  savepoint=conn.setSavepoint();
+  C
+  D
+  conn.commit();
+}catch(){
+  if(savepoint!=null)
+    conn.rollback(savepoint)
+    //只是CD出现异常，回滚到CD前即可
+  else
+    conn.rollback()
+
+}
+

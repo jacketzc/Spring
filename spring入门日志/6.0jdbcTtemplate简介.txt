@@ -6,3 +6,15 @@ odbc：微软提供的对数据库访问的标准api
 dbcp：apache开发的java数据库连接池
 c3p0：开源的jdbc连接池
 //c3p0有自动回收空闲连接的功能
+
+使用dbcp手动操作mysql的基本流程：
+//和当初用jdbc很像
+   //创建数据源
+        BasicDataSource dataSource=new BasicDataSource();
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql:///day01");
+        dataSource.setUsername("jacketzc");
+        dataSource.setPassword("");
+        //创建数据库操作对象
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update("update t_user set username =? where id=?","jacketzc","1");
