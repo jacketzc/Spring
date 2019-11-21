@@ -1,0 +1,70 @@
+事务管理的核心jar包：spring-tx-3.2.0
+几个重要的类\接口
+class TransactionTemplate
+//事务平台，创建事务的必备接口
+//有一个事务管理器成员（需要装填这个成员才能使用）
+
+interface PlatformTransactionManager
+//有一个datasource成员（需要装填这个连接池）
+//事务平台管理器
+//jdbc提供了DataourceTransactionManager作为实现类
+//Hibernate提供了HibernateTransactionManager
+//Mybatis也提供了相关的实现类
+
+
+interface TransactionDefinition
+//事务定义接口，定义事务的隔离级别、默认超时时间、传播行为
+隔离级别：
+1.Read uncommited：无隔离（允许脏读、不可重复读、幻读）
+2.Read Committed：不允许脏读
+3.Repeatable Read：在上方基础上，不允许“不可重复读”
+4.Serizlizable：串行化，事务顺序运行
+传播行为：两个业务如何共享事务
+1.requied（默认值）：A如果有事务，B将使用该事务；如果A没有，B将创建一个新的事务
+2.support：A有事务，B则使用；A没有，B将以非事务执行
+3.manoatory：A有事务，B则使用；A没有，B抛出异常
+4.requires_new：A有事务，A挂起，B创建一个新的事务执行；A没有事务，B创建新的事务
+5.not_support：A有事务，A挂起，B以非事务执行；A没有事务，B以非事务执行
+6.never：A有事务，B抛异常；A没有，B以非事务执行
+7.nested：A和B第成草用保存点机制，形成嵌套事务
+
+
+interface TransactionStatus
+//事务状态接口
+事务状态：
+bool isNewTransaction()是否是新的事务
+bool hasSavepoing()是否有保存点
+void setRollbackOnly()设置回滚
+boolean isRollbackOnly是否回滚
+void flush()刷新
+bool isCompleted()是否完成
+
+
+事务管理流程：
+dao层：设置调用数据库方法
+service层：
+  1.持有dao层引用
+  2.持有TransactionTemplate引用（管理事务）
+  3.设置引用的set方法（让spring注入）
+  4.设置调用dao方法的方法，让事务对象管理该方法的调用
+  public void transer(String outer,String inner,Integer money){
+      template.execute(new TransactionCallbackWithoutResult() {
+      //template为事务引用
+	    @Override
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                //扣钱
+                dao.out(outer,money);
+                //进账
+                dao.in(inner,money);
+            }
+        });
+xml配置文件：
+1.配置c3p0连接池bean
+2.配置dao层对象bean
+3.配置事务管理器bean
+//此处使用DataSourceTransactionManage
+//需要注入连接池作为依赖
+4.配置事务平台bean
+//需要注入事务管理器作为依赖
+5.配置service层bean
+//需要注入事务管理平台作为依赖
