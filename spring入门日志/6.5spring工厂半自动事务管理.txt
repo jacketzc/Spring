@@ -1,0 +1,31 @@
+之所以叫半自动，是因为将之前手动获取模板、操作模板的过程替换为代理对象执行
+
+service层：
+去除TransactionTemplate的set方法
+//这意味着在bean中不再有该依赖项
+取消在template.execute()方法中执行方法，仅保留原有方法
+
+xml部分：
+删除TransactionTemplate的bean以及在service中的porperty
+配置一个代理bean
+其中的参数有
+1.接口，service的接口
+2.目标类，即service类
+3.事务管理器，即transactionManager（之前已经配置过）
+4.事务属性配置
+//仅配置了传播行为以及隔离级别，并且都使用了默认值
+   <bean id="proxyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+     <property name="proxyInterfaces" value="com.jacketzc.dao.AccountDao"/>
+        <property name="target" ref="service"/>
+        <property name="transactionManager" ref="manager"/>
+        <!--事务属性配置
+            key写方法名，value写事务配置
+            格式：PROPAGATION ISOLATION readonly -EXCEPTION +EXCEPTION
+                 传播行为      隔离级别    是否只读   异常回滚      异常提交
+        -->
+        <property name="transactionAttributes">
+            <props>
+                <prop key="transfer">PROPAGATION_REQUIERD,ISOLATION_DEFAULT</prop>
+            </props>
+        </property>
+    </bean>
