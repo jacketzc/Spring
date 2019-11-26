@@ -1,0 +1,10 @@
+使用注解和使用bean配置仅为习惯区分
+
+1.删除事务通知、aop配置
+2.开启事务注解：
+    <tx:annotation-driven transaction-manager="manager"/>
+3.在需要织入的类开始添加注解
+//@Transactional(propagation= Propagation.REQUIRED,isolation = Isolation.DEFAULT)
+@Transactional
+//如果全部使用默认值，那么注解的属性就不需要写了
+//如果仅需要对类中的某个方法使用注解，那么把注解写到方法名前面
