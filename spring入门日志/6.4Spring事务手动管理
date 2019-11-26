@@ -27,6 +27,8 @@ interface TransactionDefinition
 5.not_support：A有事务，A挂起，B以非事务执行；A没有事务，B以非事务执行
 6.never：A有事务，B抛异常；A没有，B以非事务执行
 7.nested：A和B第成草用保存点机制，形成嵌套事务
+是否只读（read-only）：
+1.true：数据库之允许执行select操作
 
 
 interface TransactionStatus
