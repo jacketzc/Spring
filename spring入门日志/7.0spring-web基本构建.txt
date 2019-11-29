@@ -1,0 +1,21 @@
+创建一个spring-web项目（略）
+
+原来的spring项目有一个很大的问题，那就是每个类需要bean.xml的时候都得读取一次，现在让spring通过web.xml一次性读取到bean文件
+
+需要的包：spring-web-4.3.18.jar
+
+web.xml中的配置：
+    <!--手动添加配置文件路径（默认在WEB-INF路径下）-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    <!--由监听器在项目启动时加载bean.xml，而不是每次都通过方法调用-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+
+    </listener>
+
+servlet中获取bean的方式：
+ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+//参数为ServletContext，this代表当前servlet
