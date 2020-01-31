@@ -7,18 +7,19 @@ service层：
 
 xml部分：
 删除TransactionTemplate的bean以及在service中的porperty
-配置一个代理bean
+配置一个代理bean（这个代理对象由spring提供）
 其中的参数有
-1.接口，service的接口
+1.接口，service的接口（后被证实不需要）
 2.目标类，即service类
 3.事务管理器，即transactionManager（之前已经配置过）
 4.事务属性配置
 //仅配置了传播行为以及隔离级别，并且都使用了默认值
-   <bean id="proxyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-     <property name="proxyInterfaces" value="com.jacketzc.dao.AccountDao"/>
-        <property name="target" ref="service"/>
-        <property name="transactionManager" ref="manager"/>
-        <!--事务属性配置
+<bean id="proxyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+//不需要接口！
+      <property name="target" ref="service"/>
+//配置目标类
+      <property name="transactionManager" ref="manager"/>
+      <!--事务属性配置
             key写方法名，value写事务配置
             格式：PROPAGATION ISOLATION readonly -EXCEPTION +EXCEPTION
                  传播行为      隔离级别    是否只读   异常回滚      异常提交
@@ -26,6 +27,10 @@ xml部分：
         <property name="transactionAttributes">
             <props>
                 <prop key="transfer">PROPAGATION_REQUIERD,ISOLATION_DEFAULT</prop>
+//标准写法：仅配置传播行为和隔离级别，并且都使用默认设置
             </props>
         </property>
     </bean>
+
+
+从bean中获取的service对象就是代理对象

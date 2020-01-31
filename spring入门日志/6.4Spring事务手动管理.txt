@@ -1,12 +1,12 @@
 事务管理的核心jar包：spring-tx-3.2.0
 几个重要的类\接口
 class TransactionTemplate
-//事务平台，创建事务的必备接口
+//事务平台，这个接口直接管理事务
 //有一个事务管理器成员（需要装填这个成员才能使用）
 
 interface PlatformTransactionManager
+//事务管理器
 //有一个datasource成员（需要装填这个连接池）
-//事务平台管理器
 //jdbc提供了DataourceTransactionManager作为实现类
 //Hibernate提供了HibernateTransactionManager
 //Mybatis也提供了相关的实现类

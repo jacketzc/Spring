@@ -22,6 +22,8 @@
 
 使用C3P0数据源
 //和DBCP基本一致
+连接池所用的类不一样:
+com.mchange.v2.c3p0.ComboPooledDataSource
 dadasource的部分属性名不同
 驱动：driverClass
 url：jdbcUrl

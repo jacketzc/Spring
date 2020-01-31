@@ -28,7 +28,7 @@ private IUserService service;
 //此处将获取指定id为myservice的service实现类
 //我猜当出现多个实现类对应一个接口的时候，需要用这种方法来区分获取的对象类型
 //两处注解等效于@Resouce(name="myservice")这一个注解
-
+//此注解不需要设置set方法spring也能够注入
 
 多例注解
 @Scope("prototype")

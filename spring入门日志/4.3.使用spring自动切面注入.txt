@@ -1,8 +1,12 @@
 导入新的包：
 com.springsource.org.apache.aspectj.weaver-1.6.8.RELEASE.jar
 
-//之所以叫自动代理，是因为不需要手动配置代理bean，也不需要获取代理对象
 //默认为jdk代理，aop标签添加proxy-target-class属性为true时为cglib代理
+
+需要的类：
+代理类：继承MethodInterceptor接口并且实现invoke方法的类
+//实际上到最后执行方法的时候就是执行这个invoke方法
+真实类：需要被代理的类
 
 配置xml：
 	配置真实bean（如果使用注解，那么这一步省了）
