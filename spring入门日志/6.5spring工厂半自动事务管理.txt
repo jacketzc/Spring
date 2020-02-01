@@ -19,6 +19,7 @@ xml部分：
       <property name="target" ref="service"/>
 //配置目标类
       <property name="transactionManager" ref="manager"/>
+//这里只能用ref不能用value
       <!--事务属性配置
             key写方法名，value写事务配置
             格式：PROPAGATION ISOLATION readonly -EXCEPTION +EXCEPTION
@@ -26,7 +27,7 @@ xml部分：
         -->
         <property name="transactionAttributes">
             <props>
-                <prop key="transfer">PROPAGATION_REQUIERD,ISOLATION_DEFAULT</prop>
+                <prop key="transfer">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
 //标准写法：仅配置传播行为和隔离级别，并且都使用默认设置
             </props>
         </property>

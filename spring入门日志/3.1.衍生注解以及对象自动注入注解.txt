@@ -1,4 +1,4 @@
-在@component注解的基础上为不同的服务层添加了新的注解：
+在@Component注解的基础上为不同的服务层添加了新的注解：
 数据库层：@Repository
 服务层：@Service
 控制器层：@Controller
@@ -8,6 +8,10 @@
 来为他们自动装填对象
 //不同层次的注解使得spring可以知道创建对象的顺序，使得在高层次能自动获取低层次的对象
 //接口不需要注解，在接口的实现类上添加对应的注解即可
+//此注解不需要设置set方法spring也能够注入
+//自动装填不要求装填类前使用@Component修饰，只需要在spring环境中找到即可，在bean中配置的对象也可以参与自动装填
+！注意：自动装填完毕的对象可能并不是一个能直接使用的对象
+
 
 例：
 @Controller
@@ -28,7 +32,7 @@ private IUserService service;
 //此处将获取指定id为myservice的service实现类
 //我猜当出现多个实现类对应一个接口的时候，需要用这种方法来区分获取的对象类型
 //两处注解等效于@Resouce(name="myservice")这一个注解
-//此注解不需要设置set方法spring也能够注入
+
 
 多例注解
 @Scope("prototype")

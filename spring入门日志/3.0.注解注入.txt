@@ -6,6 +6,8 @@
 @Component("id")等价于
 <Bean id="" class="目标类"></Bean>
 
+！注意：@Component注解缺失<property>注入的功能，需要手动添加
+
 步骤
 1.添加依赖
 这是标准bean的xml文件：

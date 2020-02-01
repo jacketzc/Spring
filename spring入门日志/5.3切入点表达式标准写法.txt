@@ -1,0 +1,25 @@
+语法：execution(修饰符 返回值 包.类.方法名(参数)throws 异常)
+修饰符（一般省略）
+	public 公共方法
+	* 任意方法
+返回值
+	void 没有值
+	* 任意值
+包
+	com.jacketzc 固定包
+	com.jacketzc.* com.jacketzc目录下的所有包
+	com.jacketzc.. com.jacketzc目录下的子包（包括自己）
+类 
+	UserServiceImpl 指定类
+	*Impl 以Impl结尾
+	User* 以User开始
+	* 任意
+方法
+	add 固定方法
+	* 任意方法
+参数
+	() 无参
+	(int) 一个int类型
+	(int,void) 一个int一个void
+	(..) 任意参数（常用）
+throws：一般不写
