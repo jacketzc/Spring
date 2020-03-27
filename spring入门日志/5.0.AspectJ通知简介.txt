@@ -1,4 +1,5 @@
 AspectJ是AOP的一种实现框架（AOP本身只是一种思想）
+为什么要用AspectJ？，因为这种代理框架更加规范
 
 AspectJ也有6种通知格式：
 	before：前置通知（应用于校验）
